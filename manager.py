@@ -5,6 +5,7 @@ import os
 import shutil
 import subprocess
 import sys
+import socket
 from pathlib import Path
 import tomllib
 
@@ -24,14 +25,13 @@ class DotfilesManager:
         self.host_config = self._load_host_config()
         self.config = {
             "assume_yes": False,
-            "verbose": False,
             "force": False,
             "dry_run": False,
         }
 
     def _load_host_config(self) -> dict:
         """Load host configuration from desktop.toml"""
-        host_file = self.base_dir / "hosts" / "desktop.toml"
+        host_file = self.base_dir / "hosts" / f"{socket.gethostname()}.toml"  
         if not host_file.exists():
             logger.error(f"❌ Configuration file not found: {host_file}")
             sys.exit(1)
@@ -228,11 +228,13 @@ class DotfilesManager:
         self.config.update(
             {
                 "assume_yes": args.yes,
-                "verbose": args.verbose,
                 "force": args.force,
                 "dry_run": args.dry_run,
             }
         )
+
+        if args.verbose:
+            logger.setLevel(logging.DEBUG)
 
         if not any(vars(args).values()):
             parser.print_help()
