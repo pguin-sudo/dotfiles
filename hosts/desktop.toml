@@ -1,4 +1,5 @@
 packages = [
+    # Terminal and shell
     { name = "git", config = ".gitconfig" },
     { name = "less" },
     { name = "helix", config = ".config/helix/*" },
@@ -9,6 +10,10 @@ packages = [
     { name = "tmux" },
     { name = "tree" },
 
+    # Dev
+    { name = "github-cli" },
+
+    # Programs
     { name = "steam" },
     { name = "telegram-desktop" },
 ]
