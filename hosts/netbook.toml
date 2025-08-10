@@ -1,0 +1,22 @@
+packages = [
+    # Terminal and shell
+    { name = "git", config = ".gitconfig" },
+    { name = "less" },
+    { name = "helix", config = ".config/helix/*" },
+    { name = "fish", config = ".config/fish/*", setup = "chsh -s /usr/bin/fish" },
+    { name = "eza" },
+    { name = "starship" },
+    { name = "fisher" },
+    { name = "tmux" },
+    { name = "tree" },
+
+    # Window manager
+    { name = "river", config = ".config/river/*" },
+
+    # Dev
+    { name = "github-cli" },
+
+    # Programs
+    { name = "telegram-desktop" },
+]
+
