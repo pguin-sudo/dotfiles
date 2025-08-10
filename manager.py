@@ -97,6 +97,11 @@ class DotfilesManager:
             logger.info(f"DRY RUN: Would install: {' '.join(to_install)}")
             return True
 
+        if any(any(char.isspace() for char in pkg) for pkg in to_install):
+            logger.debug("Splitting multi-name packages...")
+
+        to_install = [part for pkg in to_install for part in pkg.split()]
+
         use_yay = bool(shutil.which("yay"))
         for pkg in to_install:
             try:
