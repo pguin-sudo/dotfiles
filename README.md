@@ -4,7 +4,7 @@ A simple Python script to manage dotfiles installation and configuration on Arch
 
 ## Features
 
-- Install packages from TOML configuration
+- Install packages from YAML configuration
 - Create symlinks for configuration files
 - Run post-install setup commands
 - Dry-run mode for previewing changes
@@ -29,19 +29,23 @@ Do not delete repository after installization. It makes symlinks, which will be 
 
 ## Configuration
 
-Edit `hosts/desktop.toml` to define your packages and configurations:
+Edit `hosts/desktop.yaml` to define your packages and configurations:
 
-```toml
-packages = [
-    # Simple package
-    { name = "git" },
-    
-    # Package with config
-    { name = "helix", config = ".config/helix/*" },
-    
-    # Package with config and setup command
-    { name = "fish", config = ".config/fish/*", setup = "chsh -s /usr/bin/fish" },
-]
+```yaml
+packages:
+  - name: git
+    config: .gitconfig
+  - name: less
+  - name: man
+  - name: helix
+    config: .config/helix/*
+  - name: fish
+    config: .config/fish/*
+    setup:
+      cmd: chsh -s /usr/bin/fish
+    check:
+      cmd: echo $SHELL
+      result: /usr/bin/fish
 ```
 
 ### Configuration Options
@@ -49,6 +53,7 @@ packages = [
 - `name`: Package name (required)
 - `config`: Path to config file(s) in `./configs/` directory (supports glob patterns)
 - `setup`: Post-install command to run
+- `check`: Command and result to check should setup command run. 
 
 ## Usage
 
@@ -77,8 +82,8 @@ dotfiles/
 │       ├── fish/
 │       └── helix/
 ├── hosts/
-│   └── desktop.toml          # Package definitions
-├── manager.py       # This script
+│   └── desktop.yaml          # Package definitions
+├── manager.py                # Main script
 └── README.md                 # This file
 ```
 

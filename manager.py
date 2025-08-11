@@ -3,11 +3,12 @@ import argparse
 import logging
 import os
 import shutil
+import socket
 import subprocess
 import sys
-import socket
 from pathlib import Path
-import tomllib
+
+import yaml
 
 logging.basicConfig(
     level=logging.INFO,
@@ -30,15 +31,15 @@ class DotfilesManager:
         }
 
     def _load_host_config(self) -> dict:
-        """Load host configuration from desktop.toml"""
-        host_file = self.base_dir / "hosts" / f"{socket.gethostname()}.toml"  
+        """Load host configuration from hosts"""
+        host_file = self.base_dir / "hosts" / f"{socket.gethostname()}.yaml"
         if not host_file.exists():
             logger.error(f"❌ Configuration file not found: {host_file}")
             sys.exit(1)
 
         try:
             with open(host_file, "rb") as f:
-                return tomllib.load(f)
+                return yaml.safe_load(f)
         except Exception as e:
             logger.error(f"❌ Error loading {host_file}: {e}")
             sys.exit(1)
@@ -69,7 +70,7 @@ class DotfilesManager:
             return False
 
     def install_packages(self):
-        """Install packages listed in TOML"""
+        """Install packages listed in YAML"""
         packages = self.host_config.get("packages", [])
         if not packages:
             logger.info("ℹ️ No packages to install")
@@ -125,7 +126,11 @@ class DotfilesManager:
             logger.error(f"Source does not exist: {src}")
             return False
 
-        if dest.exists() or dest.is_symlink():
+        if dest.is_symlink() and dest.resolve() == src:
+            logger.info(f"🔗 Link {dest} already exists")
+            return True
+
+        if dest.exists() and dest.is_symlink():
             if not self.config["force"] and not self._prompt_yes_no(
                 f"Overwrite {dest}?", default=False
             ):
@@ -204,7 +209,29 @@ class DotfilesManager:
                 logger.warning(f"⚠️ {pkg['name']} not installed, skipping setup")
                 continue
 
-            cmd = pkg["setup"]
+            if "check" in pkg:
+                cmd = pkg["check"]["cmd"]
+                result = pkg["check"]["result"]
+
+                try:
+                    logger.debug(f"⚙️ Running check: {cmd}")
+                    cmd_result = subprocess.run(
+                        cmd,
+                        check=True,
+                        capture_output=True,
+                        text=True,
+                    )
+                    if cmd_result.stdout == result:
+                        logger.debug(f"✅ Check completed for {pkg['name']}")
+                        continue
+                except Exception as e:
+                    logger.debug(f"❌ Check failed for {pkg['name']}: {e}")
+                    success = False
+                    continue
+
+                logger.debug(f"✅ Setup for {pkg['name']} has been already run")
+
+            cmd = pkg["setup"]["cmd"]
             if self.config["dry_run"]:
                 logger.info(f"DRY RUN: Would run: {cmd}")
                 continue
@@ -221,13 +248,13 @@ class DotfilesManager:
     def run(self):
         parser = argparse.ArgumentParser(description="Dotfiles Manager")
         parser.add_argument("--install", action="store_true", help="Install packages")
-        parser.add_argument("--verbose", action="store_true", help="Verbose execution")
         parser.add_argument("--symlink", action="store_true", help="Create symlinks")
         parser.add_argument("--setup", action="store_true", help="Run setup commands")
         parser.add_argument("--all", action="store_true", help="Run all operations")
-        parser.add_argument("--dry-run", action="store_true", help="Preview changes")
         parser.add_argument("--yes", action="store_true", help="Auto-confirm prompts")
+        parser.add_argument("--dry-run", action="store_true", help="Preview changes")
         parser.add_argument("--force", action="store_true", help="Force overwrites")
+        parser.add_argument("--verbose", action="store_true", help="Verbose execution")
 
         args = parser.parse_args()
         self.config.update(

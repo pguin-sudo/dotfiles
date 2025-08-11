@@ -1,0 +1,27 @@
+packages:
+  # Terminal and shell utilities
+  - name: git
+    config: .gitconfig
+  - name: less
+  - name: man
+  - name: helix
+    config: .config/helix/*
+  - name: fish
+    config: .config/fish/*
+    setup:
+      cmd: chsh -s /usr/bin/fish
+    check:
+      cmd: echo $SHELL
+      result: /usr/bin/fish
+  - name: eza
+  - name: starship
+  - name: fisher
+  - name: tmux
+  - name: tree
+
+  # Development tools
+  - name: github-cli
+
+  # Applications
+  - name: steam
+  - name: telegram-desktop
