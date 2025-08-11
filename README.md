@@ -24,8 +24,8 @@ A simple Python script to manage dotfiles installation and configuration on Arch
    cd ~/.dotfiles
    ```
 
-[!WARNING]  
-Do not delete repository after installization. It makes symlinks, which will be broken!
+> [!WARNING]  
+> Do not delete repository after installization. It makes symlinks, which will be broken!
 
 ## Configuration
 
