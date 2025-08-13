@@ -18,10 +18,12 @@ packages:
   - name: fisher
   - name: tmux
   - name: tree
+  - name: btop
 
   # Development tools
   - name: github-cli
 
   # Applications
-  - name: steam
+  - name: firefox
   - name: telegram-desktop
+  - name: steam
