@@ -18,7 +18,7 @@ riverctl focus-follows-cursor always
 # =====================
 
 # Programs
-riverctl map normal Super Return spawn 
+riverctl map normal Alt Return spawn kitty
 riverctl map normal Super T spawn kitty
 riverctl map normal Super W spawn firefox
 riverctl map normal Super A spawn "rofi -show drun"
