@@ -24,6 +24,8 @@ packages:
   - name: github-cli
 
   # Applications
+  - name: kitty ttf-jetbrains-mono-nerd
+    config: .config/kitty/*
   - name: firefox
   - name: telegram-desktop
   - name: steam

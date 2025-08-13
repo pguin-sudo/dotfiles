@@ -21,7 +21,7 @@ packages:
   - name: btop
 
   # Window manager
-  - name: river
+  - name: river 
     config: .config/river/*
   - name: seatd
   - name: rofi-wayland
@@ -30,5 +30,7 @@ packages:
   - name: github-cli
 
   # Applications
+  - name: kitty ttf-jetbrains-mono-nerd
+    config: .config/kitty/*
   - name: firefox
   - name: telegram-desktop
