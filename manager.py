@@ -58,16 +58,19 @@ class DotfilesManager:
 
     def _is_package_installed(self, pkg_name: str) -> bool:
         """Check if package is installed"""
-        try:
-            subprocess.run(
-                ["pacman", "-Qi", pkg_name],
-                check=True,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
-            return True
-        except subprocess.CalledProcessError:
-            return False
+
+        for pkg in pkg_name.split():
+            try:
+                subprocess.run(
+                    ["pacman", "-Qi", pkg],
+                    check=True,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
+            except subprocess.CalledProcessError:
+                return False
+
+        return True
 
     def install_packages(self):
         """Install packages listed in YAML"""
@@ -130,7 +133,7 @@ class DotfilesManager:
             logger.info(f"🔗 Link {dest} already exists")
             return True
 
-        if dest.exists() or dest.is_symlink():
+        if dest.exists() and dest.is_symlink():
             if not self.config["force"] and not self._prompt_yes_no(
                 f"Overwrite {dest}?", default=False
             ):
