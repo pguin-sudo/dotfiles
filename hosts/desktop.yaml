@@ -15,6 +15,7 @@ packages:
       result: /usr/bin/fish
   - name: eza
   - name: starship
+    config: .config/starship.toml
   - name: fisher
   - name: tmux
   - name: tree
