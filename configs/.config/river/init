@@ -6,8 +6,12 @@
 
 # Layout
 riverctl default-layout rivertile
-rivertile -view-padding 6 -outer-padding 6 &
+# rivertile -view-padding 6 -outer-padding 6 &
+rivertile -view-padding 0 -outer-padding 0 &
 
+riverctl background-color 0x222222
+
+riverctl focus-follows-cursor always
 
 # =====================
 # Binds
@@ -17,13 +21,14 @@ rivertile -view-padding 6 -outer-padding 6 &
 riverctl map normal Super Return spawn foot
 riverctl map normal Super T spawn foot
 riverctl map normal Super W spawn firefox
+riverctl map normal Super A spawn "rofi -show drun"
 
 # Close view
 riverctl map normal Super Q close
 
 # Focus view
-riverctl map normal Super J focus-view next
-riverctl map normal Super K focus-view previous
+riverctl map normal Alt Tab focus-view next
+riverctl map normal Shift+Alt Tab focus-view previous
 
 # Super+Shift+J and Super+Shift+K to swap the focused view with the next/previous
 # view in the layout stack

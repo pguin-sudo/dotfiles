@@ -1,5 +1,5 @@
 packages:
-  # Terminal and shell
+  # Terminal and shell utilities
   - name: git
     config: .gitconfig
   - name: less
@@ -18,13 +18,17 @@ packages:
   - name: fisher
   - name: tmux
   - name: tree
+  - name: btop
 
   # Window manager
   - name: river
     config: .config/river/*
+  - name: seatd
+  - name: rofi-wayland
 
-  # Dev
+  # Development tools
   - name: github-cli
 
-  # Programs
+  # Applications
+  - name: firefox
   - name: telegram-desktop
