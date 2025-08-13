@@ -130,7 +130,7 @@ class DotfilesManager:
             logger.info(f"🔗 Link {dest} already exists")
             return True
 
-        if dest.exists() and dest.is_symlink():
+        if dest.exists() or dest.is_symlink():
             if not self.config["force"] and not self._prompt_yes_no(
                 f"Overwrite {dest}?", default=False
             ):
