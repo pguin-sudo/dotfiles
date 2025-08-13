@@ -11,3 +11,5 @@
 	email = 138515193+pguin-sudo@users.noreply.github.com
 [core]
 	editor = helix
+[pull]
+	rebase = true
