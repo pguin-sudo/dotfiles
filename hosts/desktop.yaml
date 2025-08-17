@@ -21,8 +21,18 @@ packages:
   - name: tree
   - name: btop
 
+  # Tools
+  - name: networkmanager
+
   # Development tools
   - name: github-cli
+  - name: clang
+  - name: python-lsp-server
+  - name: dprint
+
+  # Pentesting
+  - name: nmap
+  - name: networkmanager-openvpn
 
   # Applications
   - name: kitty ttf-jetbrains-mono-nerd
@@ -30,3 +40,4 @@ packages:
   - name: firefox
   - name: telegram-desktop
   - name: steam
+  - name: obs-studio

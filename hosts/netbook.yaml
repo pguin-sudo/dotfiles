@@ -27,8 +27,18 @@ packages:
   - name: seatd
   - name: rofi-wayland
 
+  # Tools
+  - name: networkmanager
+
   # Development tools
   - name: github-cli
+  - name: clang
+  - name: python-lsp-server
+  - name: dprint
+
+  # Pentesting
+  - name: nmap
+  - name: networkmanager-openvpn
 
   # Applications
   - name: kitty ttf-jetbrains-mono-nerd
