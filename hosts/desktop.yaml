@@ -35,7 +35,7 @@ packages:
   - name: networkmanager-openvpn
 
   # Applications
-  - name: kitty ttf-jetbrains-mono-nerd
+  - name: kitty 
     config: .config/kitty
   - name: firefox
   - name: telegram-desktop
