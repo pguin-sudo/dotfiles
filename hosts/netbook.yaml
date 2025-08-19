@@ -5,9 +5,9 @@ packages:
   - name: less
   - name: man
   - name: helix
-    config: .config/helix/*
+    config: .config/helix
   - name: fish
-    config: .config/fish/*
+    config: .config/fish
     setup:
       cmd: chsh -s /usr/bin/fish
     check:
@@ -23,7 +23,7 @@ packages:
 
   # Window manager
   - name: river 
-    config: .config/river/*
+    config: .config/river
   - name: seatd
   - name: rofi-wayland
 
@@ -41,7 +41,7 @@ packages:
   - name: networkmanager-openvpn
 
   # Applications
-  - name: kitty ttf-jetbrains-mono-nerd
-    config: .config/kitty/*
+  - name: kitty
+    config: .config/kitty
   - name: firefox
   - name: telegram-desktop
