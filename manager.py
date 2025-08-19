@@ -214,25 +214,27 @@ class DotfilesManager:
 
             if "check" in pkg:
                 cmd = pkg["check"]["cmd"]
-                result = pkg["check"]["result"]
+                result = pkg["check"].get("result", "")
 
                 try:
                     logger.debug(f"⚙️ Running check: {cmd}")
                     cmd_result = subprocess.run(
                         cmd,
+                        shell=True,
                         check=True,
                         capture_output=True,
                         text=True,
                     )
-                    if cmd_result.stdout == result:
-                        logger.debug(f"✅ Check completed for {pkg['name']}")
+                    cmd_text_result = cmd_result.stdout.replace("\n", "")
+                    if cmd_text_result == result:
+                        logger.debug(f"✅ Setup for {pkg['name']} has been already run")
                         continue
+                    logger.debug(f"❌ Check failed for {pkg['name']}:\n"
+                                 f"    Result ({cmd_text_result}) != expected ({result})")
                 except Exception as e:
                     logger.debug(f"❌ Check failed for {pkg['name']}: {e}")
                     success = False
-                    continue
 
-                logger.debug(f"✅ Setup for {pkg['name']} has been already run")
 
             cmd = pkg["setup"]["cmd"]
             if self.config["dry_run"]:
