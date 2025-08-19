@@ -1,26 +1,11 @@
 packages:
-  # Terminal and shell utilities
+  # Shell utilities
+  - name: curl
+  - name: less
+  - name: tree
   - name: git
     config: .gitconfig
-  - name: less
-  - name: man
-  - name: helix
-    config: .config/helix
-  - name: fish
-    config: .config/fish
-    setup:
-      cmd: chsh -s /usr/bin/fish
-    check:
-      cmd: echo $SHELL
-      result: /usr/bin/fish
-  - name: eza
-  - name: starship
-    config: .config/starship.toml
-  - name: fisher
-  - name: tmux
-  - name: tree
-  - name: btop
-
+  
   # Window manager
   - name: ly
   - name: river 
@@ -28,21 +13,39 @@ packages:
   - name: seatd
   - name: rofi-wayland
 
-  # Tools
-  - name: networkmanager
-
-  # Development tools
-  - name: github-cli
-  - name: clang
-  - name: python-lsp-server
-  - name: dprint
-
+  # Shell setup
+  - name: kitty
+    config: .config/kitty/kitty.conf .config/kitty/hyde.conf
+  - name: zsh
+    setup: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    config: .zshrc .zshenv .config/zsh 
+  - name: starship
+    config: .config/starship 
+  - name: eza                   # Alternative ls
+  
+  # Shell applications 
+  - name: man
+  - name: tmux 
+  - name: vim
+    config: .config/vim/hyde.vim .config/vim/vimrc
+  - name: yazi                  # Terminal file explorer 
+  - name: fzf
+  - name: btop
+  
+  # Development
+  - name: github-cli 
+  - name: python-poetry
+  
   # Pentesting
   - name: nmap
   - name: networkmanager-openvpn
 
+  # Drivers
+  - name: ntfs-3g
+  - name: networkmanager
+
   # Applications
-  - name: kitty
-    config: .config/kitty
   - name: firefox
+  - name: firefox-tridactyl
   - name: telegram-desktop
+  

@@ -1,43 +1,61 @@
 packages:
-  # Terminal and shell utilities
+  # Shell utilities
+  - name: curl
+  - name: less
+  - name: tree
   - name: git
     config: .gitconfig
-  - name: less
-  - name: man
-  - name: helix
-    config: .config/helix
-  - name: fish
-    config: .config/fish
+  
+  # Window manager
+  - name: base-devel
+  - name: hyprland
+    check: 
+      cmd: hyprctl
     setup:
-      cmd: chsh -s /usr/bin/fish
+      cmd: git clone --depth 1 https://github.com/HyDE-Project/HyDE ~/HyDE || cd ~/HyDE/Scripts || ./install.sh
+    config: .config/hypr/userprefs.conf 
+
+  # Shell setup
+  - name: kitty
+    config: .config/kitty/kitty.conf .config/kitty/hyde.conf
+  - name: zsh
     check:
-      cmd: echo $SHELL
-      result: /usr/bin/fish
-  - name: eza
+      cmd: echo $0 
+      result: /usr/bin/zsh
+    setup: 
+      cmd: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    config: .zshrc .zshenv .config/zsh 
   - name: starship
-    config: .config/starship.toml
-  - name: fisher
-  - name: tmux
-  - name: tree
+    config: .config/starship 
+  - name: eza                   # Alternative ls
+  
+  # Shell applications 
+  - name: man
+  - name: tmux 
+  - name: vim
+    config: .config/vim/hyde.vim .config/vim/vimrc
+  - name: yazi                  # Terminal file explorer 
+  - name: fzf
   - name: btop
-
-  # Tools
-  - name: networkmanager
-
-  # Development tools
-  - name: github-cli
-  - name: clang
-  - name: python-lsp-server
-  - name: dprint
-
+  
+  # Development
+  - name: github-cli 
+  - name: python-poetry
+  
   # Pentesting
   - name: nmap
   - name: networkmanager-openvpn
 
+  # Drivers
+  - name: ntfs-3g
+  - name: networkmanager
+
   # Applications
-  - name: kitty 
-    config: .config/kitty
   - name: firefox
   - name: telegram-desktop
-  # - name: steam
+  - name: steam
   - name: obs-studio
+  - name: discord
+  - name: yt-dlp
+  - name: audacity
+  - name: qpwgraph 
