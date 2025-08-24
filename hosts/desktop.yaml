@@ -10,7 +10,7 @@ packages:
   - name: base-devel
   - name: hyprland
     check: 
-      cmd: hyprctl
+      cmd: hydectl 
     setup:
       cmd: git clone --depth 1 https://github.com/HyDE-Project/HyDE ~/HyDE || cd ~/HyDE/Scripts || ./install.sh
     config: .config/hypr/userprefs.conf 
@@ -20,8 +20,7 @@ packages:
     config: .config/kitty/kitty.conf .config/kitty/hyde.conf
   - name: zsh
     check:
-      cmd: echo $0 
-      result: /usr/bin/zsh
+      cmd: ls ~/.oh-my-zsh 
     setup: 
       cmd: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     config: .zshrc .zshenv .config/zsh 
