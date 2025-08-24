@@ -10,6 +10,6 @@
 	name = PGuin
 	email = 138515193+pguin-sudo@users.noreply.github.com
 [core]
-	editor = helix
+	editor = vim 
 [pull]
 	rebase = true
