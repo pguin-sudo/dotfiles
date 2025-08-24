@@ -172,13 +172,7 @@ class DotfilesManager:
             src_base = self.configs_dir
             pattern = config.strip()
 
-            matches = (
-                list(src_base.glob(pattern)) if "*" in pattern else [src_base / pattern]
-            )
-
-            if not matches:
-                logger.warning(f"⚠️ No files match: {src_base}/{pattern}")
-                continue
+            matches = [src_base / src for src in pattern.split()] 
 
             for src in matches:
                 if not src.exists():
@@ -214,7 +208,7 @@ class DotfilesManager:
 
             if "check" in pkg:
                 cmd = pkg["check"]["cmd"]
-                result = pkg["check"].get("result", "")
+                result = pkg["check"].get("result", None)
 
                 try:
                     logger.debug(f"⚙️ Running check: {cmd}")
@@ -226,14 +220,13 @@ class DotfilesManager:
                         text=True,
                     )
                     cmd_text_result = cmd_result.stdout.replace("\n", "")
-                    if cmd_text_result == result:
+                    if result is None or cmd_text_result == result:
                         logger.debug(f"✅ Setup for {pkg['name']} has been already run")
                         continue
                     logger.debug(f"❌ Check failed for {pkg['name']}:\n"
                                  f"    Result ({cmd_text_result}) != expected ({result})")
                 except Exception as e:
                     logger.debug(f"❌ Check failed for {pkg['name']}: {e}")
-                    success = False
 
 
             cmd = pkg["setup"]["cmd"]
