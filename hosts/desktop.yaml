@@ -40,7 +40,9 @@ packages:
   # Development
   - name: github-cli 
   - name: python-poetry
-  
+  - name: docker
+  - name: docker-compose
+
   # Pentesting
   - name: nmap
   - name: networkmanager-openvpn

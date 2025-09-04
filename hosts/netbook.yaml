@@ -46,6 +46,5 @@ packages:
 
   # Applications
   - name: firefox
-  - name: firefox-tridactyl
   - name: telegram-desktop
   
