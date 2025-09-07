@@ -23,7 +23,7 @@ packages:
       cmd: ls ~/.oh-my-zsh 
     setup: 
       cmd: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    config: .zshrc .zshenv .config/zsh 
+    config: .zshrc .zshenv .config/zsh .oh-my-zsh/custom/plugins 
   - name: starship
     config: .config/starship 
   - name: eza                   # Alternative ls
