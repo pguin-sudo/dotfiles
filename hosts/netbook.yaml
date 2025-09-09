@@ -1,11 +1,12 @@
 packages:
   # Shell utilities
+  - name: wget
   - name: curl
   - name: less
   - name: tree
   - name: git
     config: .gitconfig
-  
+
   # Window manager
   - name: ly
   - name: river 
@@ -39,9 +40,10 @@ packages:
   # Pentesting
   - name: nmap
   - name: networkmanager-openvpn
+  - name: insomnia
+  - name: ffuf
 
   # Drivers
-  - name: ntfs-3g
   - name: networkmanager
 
   # Applications

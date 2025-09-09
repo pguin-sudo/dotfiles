@@ -1,5 +1,6 @@
 packages:
   # Shell utilities
+  - name: wget
   - name: curl
   - name: less
   - name: tree
@@ -46,6 +47,8 @@ packages:
   # Pentesting
   - name: nmap
   - name: networkmanager-openvpn
+  - name: insomnia
+  - name: ffuf 
 
   # Drivers
   - name: ntfs-3g
