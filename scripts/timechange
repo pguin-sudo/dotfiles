@@ -1,0 +1,40 @@
+
+#!/usr/bin/env bash
+
+# Check if IP argument is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <NTP_SERVER_IP>"
+    exit 1
+fi
+
+# Set the NTP server IP
+NTP_SERVER="$1"
+
+# Stop ntpd service
+echo "Stopping ntpd service..."
+sudo systemctl stop ntpd
+
+# Sync time using ntpdate
+echo "Synchronizing time with $NTP_SERVER..."
+sudo ntpdate "$NTP_SERVER"
+
+# Prompt for setting time zone
+echo "Please enter the desired time zone (e.g., UTC, Asia/Kuwait):"
+read -r TIMEZONE
+
+# Set the time zone
+if sudo timedatectl set-timezone "$TIMEZONE"; then
+    echo "Time zone set to $TIMEZONE."
+else
+    echo "Failed to set time zone to $TIMEZONE. Please ensure the input is correct."
+    exit 1
+fi
+
+# Start ntpd service
+echo "Starting ntpd service..."
+sudo systemctl start ntpd
+
+# Display the current time settings
+echo "Time synchronized successfully with $NTP_SERVER and time zone set to $TIMEZONE."
+timedatectl
+

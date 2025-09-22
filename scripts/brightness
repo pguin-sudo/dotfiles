@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+down() {
+brightnessctl set 5%-
+brightnessctl=$(brightnessctl | grep -oP "(\d+(\.\d+)?(?=%))")
+notify-send -a "Brightness" "Decreasing to $brightnessctl%" -h int:value:"$brightnessctl" -i ~/icons/brightness.png -h string:x-canonical-private-synchronous:brightnessctl -u low
+}
+
+up() {
+brightnessctl set 5%+
+brightnessctl=$(brightnessctl | grep -oP "(\d+(\.\d+)?(?=%))")
+notify-send -a "Brightness" "Increasing to $brightnessctl%" -h int:value:"$brightnessctl" -i ~/icons/brightness.png -h string:x-canonical-private-synchronous:brightnessctl -u low
+}
+
+case "$1" in
+  up) up;;
+  down) down;;
+esac

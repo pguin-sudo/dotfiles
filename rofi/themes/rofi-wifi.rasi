@@ -1,0 +1,44 @@
+
+/*****----- Configuration -----*****/
+configuration {
+    show-icons: false;
+    prompt: "";  /* Remove default prompt */
+}
+
+/*****----- Global Properties -----*****/
+* {
+    font:                        "JetBrains Mono Nerd Font 10";
+    background:                  #201A41;
+    foreground:                  #FFFFFF;
+}
+
+/*****----- Main Window -----*****/
+window {
+    location:                    center;
+    width:                       500px;
+    height:                      35px;
+    border-radius:               10px;
+}
+
+/*****----- Input Bar -----*****/
+inputbar {
+    enabled:                     true;
+    padding:                     10px;
+    background-color:            @background;   /* Match main background */
+    text-color:                  @foreground;
+    children:                    [ "textbox-prompt-colon", "entry" ];
+}
+
+textbox-prompt-colon {
+    str:                         "Password:";   /* Customize prompt */
+    text-color:                  @foreground;
+    background-color:            inherit;
+}
+
+entry {
+    enabled:                     true;
+    background-color:            @background;   /* Match main background */
+    text-color:                  @foreground;
+    placeholder:                 "";            /* Remove placeholder text */
+}
+

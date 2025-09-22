@@ -1,0 +1,19 @@
+font=JetBrains Mono 13
+background-color=#222034
+text-color=#8A909E
+border-size=0
+border-radius=8
+icons=1
+max-icon-size=32
+max-visible=5
+default-timeout=5500
+width=540
+
+
+[urgency=critical]
+border-color=#bf616a
+border-size=1
+default-timeout=0
+
+[urgency=low]
+text-color=#FFFFFF
